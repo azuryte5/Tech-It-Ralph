@@ -14,12 +14,14 @@ app.set('view engine', 'handlebars');
 
 app.use(express.json());
 
+app.use(require('./controllers/'));
+
 app.get('/', (req, res) => {
     res.render('layouts/main');
   });
 // force true every time server restarts it restarts the cookies
 // turn it false when program is ready.
-sequelize.sync({ force: true }).then(() =>{
+sequelize.sync({ force: false }).then(() =>{
     app.listen(PORT, () => {
       console.log(`Welcome to Tech Blog. Tuning in on ${PORT}!`);
     });

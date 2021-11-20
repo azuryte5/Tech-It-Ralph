@@ -1,4 +1,5 @@
 const router = require('express').Router();
+// add withAuth later
 const { User, Post, Comment } = require('../../models');
 
 // GET all users
@@ -20,21 +21,21 @@ router.get('/:id', (req, res) => {
       where: {
         id: req.params.id
       }
-    //   ,
-    //   include: [
-    //     {
-    //       model: Post,
-    //       attributes: ['id', 'title', 'content']
-    //     },
-    //     {
-    //       model: Comment,
-    //       attributes: ['id', 'feedback'],
-    //     //   include: {
-    //     //     model: Post,
-    //     //     attributes: ['title']
-    //     //   }
-    //     },
-    //   ]
+      ,
+      include: [
+        {
+          model: Post,
+          attributes: ['id', 'title', 'content', 'created_at']
+        },
+        {
+          model: Comment,
+          attributes: ['id', 'feedback', 'created_at'],
+          include: {
+            model: Post,
+            attributes: ['title']
+          }
+        },
+      ]
     })
       .then(dbUserData => {
         if (!dbUserData) {

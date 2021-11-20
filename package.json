@@ -18,7 +18,7 @@
   "scripts": {
     "start": "node server.js",
     "test": "node test",
-    "seed": "node seeds/index.js"
+    "seeds": "node seeds/index.js"
   },
   "repository": {
     "type": "git",

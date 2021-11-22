@@ -2,7 +2,7 @@ const router = require('express').Router();
 // const sequelize = require('../config/connection');
 const { Post, User, Comment} = require('../models');
 
-
+// Find all Posts on Homepage
 router.get('/', (req, res) => {
   Post.findAll({
     attributes: [
@@ -11,6 +11,7 @@ router.get('/', (req, res) => {
       'title',
       'created_at',
     ],
+    order:[['created_at', 'DESC']],
     include: [
       {
         model: Comment,
@@ -28,7 +29,7 @@ router.get('/', (req, res) => {
   })
     .then(dbPostData => {
     const posts = dbPostData.map(post => post.get({ plain: true }));
-    console.log(posts)
+    // console.log(posts)
 
       res.render('homepage', {
       posts, loggedIn: req.session.loggedIn
@@ -75,7 +76,7 @@ router.get('/post/:id', (req, res) => {
 
       const post = dbPostData.get({ plain: true });
       // This will get changed to single post later
-      res.render('homepage', {
+      res.render('single-post', {
         post, 
         loggedIn: req.session.loggedIn
       });

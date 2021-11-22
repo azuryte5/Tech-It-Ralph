@@ -12,7 +12,7 @@ const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
 const sess = {
     secret: `I'm Gonna Wreck-it`,
-    cookie: {},
+    cookie: {expires: 60000},
     resave: false,
     saveUninitialized: true,
     store: new SequelizeStore({

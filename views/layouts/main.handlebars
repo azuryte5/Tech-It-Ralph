@@ -21,16 +21,18 @@
         {{else}}
         <a href="/login">login</a>
         {{/if}}
+        {{#if loggedIn}}
+        <div>Currently Login in as : {{{user_id}}}</div>
+        {{/if}}
       </nav>
     </header>
     <main>
-      This is the body : {{{ body }}}
+       {{{ body }}}
     </main>
-    <footer>Currently Login in as : {{session.username}}</footer>
+
   </div>
   
   {{#if loggedIn}}
-    <span>The Log out script is live.</span>
   <script src="/javascript/logout.js"></script>
   {{/if}}
 </body>

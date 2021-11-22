@@ -28,10 +28,10 @@ router.get('/', (req, res) => {
   })
     .then(dbPostData => {
     const posts = dbPostData.map(post => post.get({ plain: true }));
-    // console.log(posts)
+    // console.log(req.session.username)
 
       res.render('homepage', {
-      posts, loggedIn: req.session.loggedIn
+      posts, loggedIn: req.session.loggedIn, user_id: req.session.username
     });
     })
     .catch(err => {
@@ -76,7 +76,8 @@ router.get('/post/:id', (req, res) => {
       const post = dbPostData.get({ plain: true });
       res.render('single-post', {
         post, 
-        loggedIn: req.session.loggedIn
+        loggedIn: req.session.loggedIn,
+        user_id: req.session.username
       });
     })
     .catch(err => {

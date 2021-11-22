@@ -49,6 +49,28 @@ router.get('/:id', (req, res) => {
         res.status(500).json(err);
       });
   });
+
+  //Create a new user with sign up button
+  router.post('/', (req, res) => {
+    // expects {username: 'Lernantino', email: 'lernantino@gmail.com', password: 'password1234'}
+    User.create({
+      username: req.body.username,
+      password: req.body.password
+    })
+      .then(dbUserData => {
+        req.session.save(() => {
+          req.session.user_id = dbUserData.id;
+          req.session.username = dbUserData.username;
+          req.session.loggedIn = true;
+    
+          res.json(dbUserData);
+        });
+      })
+      .catch(err => {
+        console.log(err);
+        res.status(500).json(err);
+      });
+  });
   
   router.post('/login', (req, res) => {
     // expects {username: 'bob@apple.com', password: 'password1234'}

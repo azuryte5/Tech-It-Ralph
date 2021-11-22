@@ -1,12 +1,15 @@
 const { Model, DataTypes} = require('sequelize');
 const sequelize = require('../config/connection');
-// const bcrypt = require('bcrypt'); when ready activate
+const bcrypt = require('bcrypt');
 
-class User extends Model {}
-// add this later
-// async checkPassword(loginPw) {
-//     return await bcrypt.compare(loginPw, this.password);
-    User.init(
+class User extends Model {
+
+checkPassword(loginPw) {
+    return  bcrypt.compare(loginPw, this.password);
+ }
+}
+
+User.init(
     {
      id: {
          type: DataTypes.INTEGER,
@@ -27,7 +30,16 @@ class User extends Model {}
    },
    {hooks: {
        // hook: this is where bcrypt will go for new and updated users beforeCreate, beforeUpdate
-   },
+       async beforeCreate(newUserData) {
+        newUserData.password = await bcrypt.hash(newUserData.password, 10);
+        return newUserData;
+      },
+
+      async beforeUpdate(updatedUserData) {
+        updatedUserData.password = await bcrypt.hash(updatedUserData.password, 10);
+        return updatedUserData;
+      }
+    },
    sequelize,
    timestamps: true,
    freezeTableName: true,

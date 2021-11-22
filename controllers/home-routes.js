@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const sequelize = require('../config/connection');
+// const sequelize = require('../config/connection');
 const { Post, User, Comment} = require('../models');
 
 
@@ -29,15 +29,10 @@ router.get('/', (req, res) => {
     .then(dbPostData => {
     const posts = dbPostData.map(post => post.get({ plain: true }));
     console.log(posts)
-    // const data = {
-    //     feed: dbPostData[0]
-        // .get({plain: true})
-    // }
-    // const post = dbPostData.get({ plain:true });
-    
-      res.render('homepage', { posts }
-    //   { posts, loggedIn: req.session.loggedIn}
-      );
+
+      res.render('homepage', {
+      posts, loggedIn: req.session.loggedIn
+    });
     })
     .catch(err => {
       console.log(err);
@@ -79,10 +74,10 @@ router.get('/post/:id', (req, res) => {
       }
 
       const post = dbPostData.get({ plain: true });
-
+      // This will get changed to single post later
       res.render('homepage', {
-        post 
-        // loggedIn: req.session.loggedIn
+        post, 
+        loggedIn: req.session.loggedIn
       });
     })
     .catch(err => {
@@ -92,11 +87,10 @@ router.get('/post/:id', (req, res) => {
 });
 
 router.get('/login', (req, res) => {
-// This gets added later to prevent logging in twice 
-//  if (req.session.loggedIn) {
-//     res.redirect('/');
-//     return;
-//   }
+ if (req.session.loggedIn) {
+    res.redirect('/');
+    return;
+  }
   res.render('login');
 });
 

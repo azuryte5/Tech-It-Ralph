@@ -28,9 +28,7 @@ class Post extends Model {}
         }
       }
    },
-   {hooks: {
-       // hook: this is where bcrypt will go for new and updated users beforeCreate, beforeUpdate
-   },
+   {
    sequelize,
    timestamps: true,
    freezeTableName: true,

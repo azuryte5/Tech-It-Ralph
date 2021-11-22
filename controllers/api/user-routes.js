@@ -62,20 +62,31 @@ router.get('/:id', (req, res) => {
         return;
       }
   
-    //   const validPassword = dbUserData.checkPassword(req.body.password);
-    //   if (!validPassword) {
-    //     res.status(400).json({ message: 'Incorrect password!' });
-    //     return;
-    //   }
+      const validPassword = dbUserData.checkPassword(req.body.password);
+      if (!validPassword) {
+        res.status(400).json({ message: 'Incorrect password!' });
+        return;
+      }
   
-    //   req.session.save(() => {
-    //     req.session.user_id = dbUserData.id;
-    //     req.session.username = dbUserData.username;
-    //     req.session.loggedIn = true;
+      req.session.save(() => {
+        req.session.user_id = dbUserData.id;
+        req.session.username = dbUserData.username;
+        req.session.loggedIn = true;
     
-        res.json({ user: dbUserData, alert: 'You are now logged in!' });
-    //   });
+        res.json({ user: dbUserData, alert: `You are now logged in!` });
+      });
     });
+  });
+
+  router.post('/logout', (req, res) => {
+    if (req.session.loggedIn) {
+      req.session.destroy(() => {
+        res.status(204).end();
+      });
+    }
+    else {
+      res.status(404).end();
+    }
   });
 
 module.exports = router;

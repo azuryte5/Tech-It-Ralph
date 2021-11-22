@@ -1,5 +1,4 @@
 const router = require('express').Router();
-// const sequelize = require('../config/connection');
 const { Post, User, Comment} = require('../models');
 
 // Find all Posts on Homepage
@@ -75,7 +74,6 @@ router.get('/post/:id', (req, res) => {
       }
 
       const post = dbPostData.get({ plain: true });
-      // This will get changed to single post later
       res.render('single-post', {
         post, 
         loggedIn: req.session.loggedIn
@@ -87,6 +85,7 @@ router.get('/post/:id', (req, res) => {
     });
 });
 
+//Takes user to login page
 router.get('/login', (req, res) => {
  if (req.session.loggedIn) {
     res.redirect('/');

@@ -4,7 +4,7 @@
     <span>Title: {{{title}}}</span>
   </div>
   <span> Content: {{{content}}}</span>
-  <span> Date: {{{created_at}}}</span>
-  <span> Created by:{{{user.username}}}</span>
-   <a href="/post/{{id}}">Comments:{{comments.length}}</a>
+  <span> Date: {{{format_date created_at}}}</span>
+  <span> Created by: {{{user.username}}}</span>
+   <a href="/post/{{id}}">{{comments.length}} {{format_plural "comment" comments.length}}</a>
 </article>

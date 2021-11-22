@@ -1,9 +1,10 @@
 const router = require('express').Router();
 const sequelize = require('../../config/connection');
+const withAuth = require('../../utils/auth');
 const { Post, User, Comment } = require('../../models');
 
+// Find all posts for homepage
 router.get('/', (req, res) => {
-    // Need to fix order later
     Post.findAll({
       attributes: [
         'id',
@@ -34,6 +35,7 @@ router.get('/', (req, res) => {
       });
   });
 
+  // find all posts by one user
   router.get('/:id', (req, res) => {
     Post.findOne({
       where: { id: req.params.id },
@@ -70,8 +72,10 @@ router.get('/', (req, res) => {
         res.status(500).json(err);
       });
   });
-  // Add auth later
-  router.post('/', (req, res) => {
+
+
+  // Signed in Users can create new posts
+  router.post('/', withAuth, (req, res) => {
     Post.create({
       user_id: req.session.user_id,
       title: req.body.title,
@@ -84,8 +88,9 @@ router.get('/', (req, res) => {
         res.status(500).json(err);
       });
   });
-// add with auth later
-  router.put('/:id', (req, res) => {
+
+// Signed in Users can edit their posts
+  router.put('/:id', withAuth, (req, res) => {
     Post.update(
       {
         title: req.body.title,
@@ -110,8 +115,8 @@ router.get('/', (req, res) => {
       });
   });
 
-//add auth later
-  router.delete('/:id', (req, res) => {
+//Signed in users can delete their posts
+  router.delete('/:id', withAuth, (req, res) => {
     console.log('id', req.params.id);
     Post.destroy({
       where: {
@@ -130,4 +135,5 @@ router.get('/', (req, res) => {
         res.status(500).json(err);
       });
   });
+
   module.exports = router;

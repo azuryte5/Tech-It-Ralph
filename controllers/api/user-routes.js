@@ -1,8 +1,8 @@
 const router = require('express').Router();
-// add withAuth later
+const withAuth = require('../../utils/auth');
 const { User, Post, Comment } = require('../../models');
 
-// GET all users
+// GET all users for Insomnia 
 router.get('/', (req, res) => {
     User.findAll({
     //   attributes: { exclude: ['password'] }
@@ -14,10 +14,9 @@ router.get('/', (req, res) => {
       });
   });
   
-// GET One User
+// Find one user for Insomnia
 router.get('/:id', (req, res) => {
     User.findOne({
-    //   attributes: { exclude: ['password'] },
       where: {
         id: req.params.id
       }
@@ -50,9 +49,9 @@ router.get('/:id', (req, res) => {
       });
   });
 
-  //Create a new user with sign up button
+  // Create a new user with sign up button
   router.post('/', (req, res) => {
-    // expects {username: 'Lernantino', email: 'lernantino@gmail.com', password: 'password1234'}
+    // expects {username: 'StanLitwak', password: '12345'}
     User.create({
       username: req.body.username,
       password: req.body.password
@@ -72,8 +71,9 @@ router.get('/:id', (req, res) => {
       });
   });
   
+  // Try to log in user with post and findone
   router.post('/login', (req, res) => {
-    // expects {username: 'bob@apple.com', password: 'password1234'}
+    // expects {username: 'Ralph', password: 'wreckingriot'}
     User.findOne({
       where: {
         username: req.body.username
@@ -100,6 +100,7 @@ router.get('/:id', (req, res) => {
     });
   });
 
+  // Log out currently signed in user
   router.post('/logout', (req, res) => {
     if (req.session.loggedIn) {
       req.session.destroy(() => {

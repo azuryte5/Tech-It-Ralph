@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const { Comment } = require('../../models');
-// const withAuth = require('../../utils/auth');
+const withAuth = require('../../utils/auth');
 
 router.get('/', (req, res) => {
   Comment.findAll()
@@ -27,9 +27,9 @@ router.get('/:id', (req, res) => {
       res.status(500).json(err);
     });
 });
-// add withauth later
-router.post('/', (req, res) => {
-  // expects => {comment_text: "This is the comment", user_id: 1, post_id: 2}
+
+// Create New comment
+router.post('/', withAuth, (req, res) => {
   Comment.create({
     user_id: req.session.user_id,
     post_id: req.body.post_id,
@@ -41,8 +41,10 @@ router.post('/', (req, res) => {
       res.status(400).json(err);
     });
 });
-//with auth
-router.delete('/:id', (req, res) => {
+
+
+//Only signed in users can delete comments
+router.delete('/:id', withAuth, (req, res) => {
   Comment.destroy({
     where: {
       id: req.params.id

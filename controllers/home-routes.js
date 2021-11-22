@@ -27,12 +27,15 @@ router.get('/', (req, res) => {
     ]
   })
     .then(dbPostData => {
-    // const posts = dbPostData.map(post => post.get({ plain: true }));
-    const data = {
-        feed: dbPostData[0]
+    const posts = dbPostData.map(post => post.get({ plain: true }));
+    console.log(posts)
+    // const data = {
+    //     feed: dbPostData[0]
         // .get({plain: true})
-    }
-      res.render('homepage', data
+    // }
+    // const post = dbPostData.get({ plain:true });
+    
+      res.render('homepage', { posts }
     //   { posts, loggedIn: req.session.loggedIn}
       );
     })
@@ -87,14 +90,14 @@ router.get('/post/:id', (req, res) => {
       res.status(500).json(err);
     });
 });
-// Login soon
-// router.get('/login', (req, res) => {
-// //   if (req.session.loggedIn) {
-// //     res.redirect('/');
-// //     return;
-// //   }
 
-//   res.render('login');
-// });
+router.get('/login', (req, res) => {
+// This gets added later to prevent logging in twice 
+//  if (req.session.loggedIn) {
+//     res.redirect('/');
+//     return;
+//   }
+  res.render('login');
+});
 
 module.exports = router;

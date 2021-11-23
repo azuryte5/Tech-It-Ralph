@@ -13,21 +13,28 @@
 ## Links
 GitHub repository: [Tech-it-Ralph](https://github.com/azuryte5/Tech-It-Ralph)
 
-The link to the heroku
+The link to the heroku: [Tech-it-Ralph on Heroku](https://polar-sierra-45467.herokuapp.com/)
 
 -----
 ## Usage
+This application is for the digital characters of Wreck-it Ralph. Mainly due to the word play with "Tech-it Ralph. 
 
+Here we have a tech blog about the goings on with our favourite characters on a post/comment type forum.
 
-For examples to interact with database checkout the Screencastify video and follow along with Insomnia 
+Existing users can login in with their credentials and add posts, edit and delete their old posts. Users can also comment on their own or other posts.
 
-Update new images
-<!-- ![Insomnia interface](https://user-images.githubusercontent.com/85147307/142677794-82fe037c-b15a-492d-b800-49d8a5ebfdd5.png) 
-![VS code Routes & Model](https://user-images.githubusercontent.com/85147307/142677911-63ce71ee-085b-4561-b8b3-8f1eeefbce4d.png) -->
+New users can sign up with a user name and password. 
+
+This application demonstrates an understanding of a MVC approach. 
+
+First image shows an example of the most recent posts. The current signed in user and where they can log out or comment on other posts.
+
+The 2nd image shows the code particularly the handlebars and server code.
+![Dashboard of webpage](https://user-images.githubusercontent.com/85147307/143083477-47cfb753-44fb-450c-aba6-380ff7b5ef57.png) 
+![VS code Handlebars & Servers](https://user-images.githubusercontent.com/85147307/143083629-9a5efad7-22aa-4594-8f12-00895c27c876.png)
  
 -----
 ## Tech Used 
-
 - Node js
 - sequelize
 - mysql2
@@ -36,7 +43,9 @@ Update new images
 - express handlebars
 - express session
 - connect session sequelize
-- heroku
+- heroku & JawsDB
+- Bulma
+- [Google font](https://fonts.google.com/specimen/Press+Start+2P?thickness=8&width=10#standard-styles)
 
 ## User Story
 
@@ -48,7 +57,6 @@ SO THAT I can publish articles, blog posts, and my thoughts and opinions
 ```
 
 ## Acceptance Criteria
-✔️
 ```md
 GIVEN a CMS-style blog site
 [✔️]WHEN I visit the site for the first time

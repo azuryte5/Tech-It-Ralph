@@ -79,7 +79,7 @@ router.get('/:id', (req, res) => {
       }
     }).then(dbUserData => {
       if (!dbUserData) {
-        res.status(400).json({ alert: 'No user with that UserName!' });
+        res.status(400).json({ message: 'No user with that UserName!' });
         return;
       }
   
@@ -94,7 +94,7 @@ router.get('/:id', (req, res) => {
         req.session.username = dbUserData.username;
         req.session.loggedIn = true;
     
-        res.json({ user: dbUserData, alert: `You are now logged in!` });
+        res.json({ user: dbUserData, message: `You are now logged in!` });
       });
     });
   });

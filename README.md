@@ -30,6 +30,8 @@ This application demonstrates an understanding of a MVC approach.
 First image shows an example of the most recent posts. The current signed in user and where they can log out or comment on other posts.
 
 The 2nd image shows the code particularly the handlebars and server code.
+
+
 ![Dashboard of webpage](https://user-images.githubusercontent.com/85147307/143083477-47cfb753-44fb-450c-aba6-380ff7b5ef57.png) 
 ![VS code Handlebars & Servers](https://user-images.githubusercontent.com/85147307/143083629-9a5efad7-22aa-4594-8f12-00895c27c876.png)
  

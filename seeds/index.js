@@ -1,7 +1,7 @@
 const sequelize = require('../config/connection');
 const { User, Post, Comment } = require('../models');
 
-const seedUsers = [
+const seededU = [
     {
     username: "Vanellope",
     password: "theglitch"},
@@ -19,7 +19,7 @@ const seedUsers = [
     password: "dontlickme"
 }]
 
-const seedPosts = [
+const seededP = [
 {
     title:"Hero's Duty new update",
     content: "Sergeant Calhoun has a new mission to defend the citadel",
@@ -61,7 +61,7 @@ const seedPosts = [
     user_id: 1
 }]
 
-const seedComments = [
+const seededC = [
     {
     feedback: "This new level looks great",
     user_id: 1,
@@ -120,9 +120,9 @@ const seedComments = [
 
 ]
 
-const seedUsers = () => User.bulkCreate(seedUsers);
-const seedPosts = () => Post.bulkCreate(seedPosts);
-const seedComments = () => Comment.bulkCreate(seedComments);
+const seedUsers = () => User.bulkCreate(seededU);
+const seedPosts = () => Post.bulkCreate(seededP);
+const seedComments = () => Comment.bulkCreate(seededC);
 
 const seedAll = async () => {
     await sequelize.sync({force: true})

@@ -1,12 +1,11 @@
-const { Model, DataTypes} = require('sequelize');
+const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 const bcrypt = require('bcrypt');
 
 class User extends Model {
-
-checkPassword(loginPw) {
-    return bcrypt.compareSync(loginPw, this.password);
- }
+  async checkPassword(loginPw) {
+    return await bcrypt.compareSync(loginPw, this.password);
+  }
 }
 
 User.init(
@@ -25,12 +24,12 @@ User.init(
          type:DataTypes.STRING,
          allowNull:false,
          validate: {
-             len: [4]}
+             len:[4]}
       }
    },
    {hooks: {
        // hook: this is where bcrypt will go for new and updated users beforeCreate, beforeUpdate
-       async beforeCreate(newUserData) {
+      async beforeCreate(newUserData) {
         newUserData.password = await bcrypt.hash(newUserData.password, 10);
         return newUserData;
       },

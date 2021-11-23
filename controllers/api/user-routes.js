@@ -60,8 +60,9 @@ router.get('/:id', (req, res) => {
           req.session.user_id = dbUserData.id;
           req.session.username = dbUserData.username;
           req.session.loggedIn = true;
-    
-          res.json(dbUserData);
+          
+          const { id, username} = dbUserData
+          res.json({ id, username });
         });
       })
       .catch(err => {
@@ -77,24 +78,26 @@ router.get('/:id', (req, res) => {
       where: {
         username: req.body.username
       }
-    }).then(async dbUserData => {
+    }).then(dbUserData => {
       if (!dbUserData) {
         res.status(400).json({ message: 'No user with that UserName!' });
         return;
       }
   
-      const validPassword = await dbUserData.checkPassword(req.body.password);
+      const validPassword = dbUserData.checkPassword(req.body.password);
+      
       if (!validPassword) {
         res.status(400).json({ message: 'Incorrect password!' });
         return;
       }
-  
+      console.log(validPassword)
       req.session.save(() => {
         req.session.user_id = dbUserData.id;
         req.session.username = dbUserData.username;
         req.session.loggedIn = true;
-    
-        res.json({ user: dbUserData, message: `You are now logged in!` });
+      // console.log(req.session)
+      // const { id, username } = dbUserData;
+        res.json({user: dbUserData, message: `You are now logged in!` });
       });
     });
   });

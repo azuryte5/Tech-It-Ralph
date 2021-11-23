@@ -1,10 +1,8 @@
 <article class="post">
   <div class="title">
-    <span>Id: {{{id}}}</span>
-    <span>Title: {{{title}}}</span>
+    <span>{{{title}}}</span>
   </div>
-  <span> Content: {{{content}}}</span>
-  <span> Date: {{{format_date created_at}}}</span>
-  <span> Created by: {{{user.username}}}</span>
-   <a href="/post/{{id}}">{{comments.length}} {{format_plural "comment" comments.length}}</a>
+  <span>{{{content}}}</span>
+  <div class="is multiline"> Date: {{{format_date created_at}}} Created by: {{{user.username}}}</div>
+   <a class="is-danger is-light" href="/post/{{id}}">{{comments.length}} {{format_plural "comment" comments.length}}</a>
 </article>

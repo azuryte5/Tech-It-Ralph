@@ -120,7 +120,7 @@ const seededC = [
 
 ]
 
-const seedUsers = () => User.bulkCreate(seededU);
+const seedUsers = () => User.bulkCreate(seededU, {individualHooks: true});
 const seedPosts = () => Post.bulkCreate(seededP);
 const seedComments = () => Comment.bulkCreate(seededC);
 
